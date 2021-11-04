@@ -1,0 +1,60 @@
+
+
+Entidades:
+Aluno
+guid
+nome
+telefone
+endereco
+
+
+Período letivo
+guid
+periodo_letivo_ano - ano [ex: 2020]
+periodo_letivo_sem - semestre [ex 2] 
+periodo_letivo_completo = 2020.2
+
+
+
+Curso
+guid
+nome
+PeriodoLetivoId
+
+
+Disciplinas
+guid
+nome
+PeriodoLetivoId
+
+
+
+
+Curso_Disciplinas [[1 curso pode ter N disciplinas, uma disciplina pode ser cadastrada em N cursos]]
+curso
+disciplina
+
+
+Matrícula_Aluno_Curso [[1 aluno pode estar matrículado em apenas um curso]]
+aluno
+curso
+
+
+
+
+
+
+
+
+
+
+Um curso tem uma ou várias disciplinas
+Uma disciplina pode estar em um ou vários cursos
+
+
+Um aluno pode estar em apenas um curso mas em várias disciplinas
+ao cadastrar um aluno em um curso, automaticamente realizar a matrícula dele nas disciplinas
+
+
+
+
