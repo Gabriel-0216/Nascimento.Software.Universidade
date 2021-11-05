@@ -180,14 +180,9 @@ namespace Nascimento.Software.Universidade.Infra.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StudentDisciplinesId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CollegeYearId");
-
-                    b.HasIndex("StudentDisciplinesId");
 
                     b.ToTable("Disciplines");
                 });
@@ -205,57 +200,6 @@ namespace Nascimento.Software.Universidade.Infra.Migrations
                     b.HasIndex("DisciplineId");
 
                     b.ToTable("Courses_Disciplines");
-                });
-
-            modelBuilder.Entity("Nascimento.Software.Universidade.Domain.Models.University.StudentCourse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Created_At")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("Ra")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentCourse");
-                });
-
-            modelBuilder.Entity("Nascimento.Software.Universidade.Domain.Models.University.StudentDisciplines", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Created_At")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("RegisterToken")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentDisciplines");
                 });
 
             modelBuilder.Entity("Nascimento.Software.Universidade.Domain.Models.Person.Student.Student", b =>
@@ -307,10 +251,6 @@ namespace Nascimento.Software.Universidade.Infra.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Nascimento.Software.Universidade.Domain.Models.University.StudentDisciplines", null)
-                        .WithMany("Disciplines")
-                        .HasForeignKey("StudentDisciplinesId");
-
                     b.Navigation("CollegeYear");
                 });
 
@@ -331,35 +271,6 @@ namespace Nascimento.Software.Universidade.Infra.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("Discipline");
-                });
-
-            modelBuilder.Entity("Nascimento.Software.Universidade.Domain.Models.University.StudentCourse", b =>
-                {
-                    b.HasOne("Nascimento.Software.Universidade.Domain.Models.University.Courses.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId");
-
-                    b.HasOne("Nascimento.Software.Universidade.Domain.Models.Person.Student.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("Nascimento.Software.Universidade.Domain.Models.University.StudentDisciplines", b =>
-                {
-                    b.HasOne("Nascimento.Software.Universidade.Domain.Models.Person.Student.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("Nascimento.Software.Universidade.Domain.Models.University.StudentDisciplines", b =>
-                {
-                    b.Navigation("Disciplines");
                 });
 #pragma warning restore 612, 618
         }
