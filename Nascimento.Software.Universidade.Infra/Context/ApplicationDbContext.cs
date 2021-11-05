@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Nascimento.Software.Universidade.Domain.Models.Person.Shared;
 using Nascimento.Software.Universidade.Domain.Models.Person.Student;
 using Nascimento.Software.Universidade.Domain.Models.Person.Teacher;
+using Nascimento.Software.Universidade.Domain.Models.University;
 using Nascimento.Software.Universidade.Domain.Models.University.CollegeYear;
 using Nascimento.Software.Universidade.Domain.Models.University.Courses;
 using Nascimento.Software.Universidade.Domain.Models.University.Disciplines;
@@ -33,6 +34,9 @@ namespace Nascimento.Software.Universidade.Infra.Context
         public DbSet<Discipline> Disciplines { get; set; }
         public DbSet<Course_Disciplines> Courses_Disciplines { get; set; }
         public DbSet<TermTime> LectiveYears { get; set; }
+        public DbSet<StudentDisciplines> StudentDisciplines{get;set;}
+        public DbSet<StudentCourse> StudentCourse {get;set;}
+
 
     }
 }
