@@ -1,19 +1,40 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nascimento.Software.Universidade.Domain.Models.Person.Student;
+using Nascimento.Software.Universidade.Domain.Models.University;
 using Nascimento.Software.Universidade.Domain.Models.University.Courses;
 using Nascimento.Software.Universidade.Domain.Models.University.Disciplines;
+using Nascimento.Software.Universidade.Infra.Context;
 
 namespace NascimentoSoftware.Universidade.Infra.Processment
 {
 
     public class GenerateAcademicContract : IAcademicContract
     {
-    
+        private ApplicationDbContext _context;
         private async Task<bool> RegisterStudentCourse(Student studentEntity, Course course)
         {
-            // gerar um registro na tabela StudentCourse pra Aluno -> Curso
-            // 1 para 1
+            try
+            {
+                var studentCourse = new StudentCourse()
+                {
+                    Course = course,
+                    Student = studentEntity,
+                    Created_At = System.DateTime.Today,
+                    Ra = new System.Guid(),
+                };
+
+                _context.StudentCourse.Add(studentCourse);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
+
             throw new System.NotImplementedException();
         }
 
@@ -26,14 +47,8 @@ namespace NascimentoSoftware.Universidade.Infra.Processment
 
         public async Task<bool> Start(Student studentEntity, Course course)
         {
-            //Método que será chamado pra realizar o processo 
-            await RegisterStudentCourse(studentEntity, course);
-            
-            // pegar todas as disciplinas daquele curso, colocar numa lista e passar 
-            // pro register student disciplines
-            
-
-            throw new System.NotImplementedException();
+            var result = await RegisterStudentCourse(studentEntity, course);
+            return result;
         }
     }
 
