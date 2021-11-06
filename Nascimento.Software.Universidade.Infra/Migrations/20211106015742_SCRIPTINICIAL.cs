@@ -99,8 +99,8 @@ namespace Nascimento.Software.Universidade.Infra.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ra = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressId = table.Column<int>(type: "int", nullable: true),
-                    PhoneId = table.Column<int>(type: "int", nullable: true),
+                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    PhoneId = table.Column<int>(type: "int", nullable: false),
                     Created_At = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Updatet_At = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -112,13 +112,13 @@ namespace Nascimento.Software.Universidade.Infra.Migrations
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Students_Phones_PhoneId",
                         column: x => x.PhoneId,
                         principalTable: "Phones",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -129,8 +129,8 @@ namespace Nascimento.Software.Universidade.Infra.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Identification = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressId = table.Column<int>(type: "int", nullable: true),
-                    PhoneId = table.Column<int>(type: "int", nullable: true),
+                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    PhoneId = table.Column<int>(type: "int", nullable: false),
                     Created_At = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Updatet_At = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -142,13 +142,13 @@ namespace Nascimento.Software.Universidade.Infra.Migrations
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_teachers_Phones_PhoneId",
                         column: x => x.PhoneId,
                         principalTable: "Phones",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,13 +166,40 @@ namespace Nascimento.Software.Universidade.Infra.Migrations
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Courses_Disciplines_Disciplines_DisciplineId",
                         column: x => x.DisciplineId,
                         principalTable: "Disciplines",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentCourses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentCourses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StudentCourses_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StudentCourses_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -189,6 +216,16 @@ namespace Nascimento.Software.Universidade.Infra.Migrations
                 name: "IX_Disciplines_CollegeYearId",
                 table: "Disciplines",
                 column: "CollegeYearId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentCourses_CourseId",
+                table: "StudentCourses",
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentCourses_StudentId",
+                table: "StudentCourses",
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_AddressId",
@@ -217,25 +254,28 @@ namespace Nascimento.Software.Universidade.Infra.Migrations
                 name: "Courses_Disciplines");
 
             migrationBuilder.DropTable(
-                name: "Students");
+                name: "StudentCourses");
 
             migrationBuilder.DropTable(
                 name: "teachers");
 
             migrationBuilder.DropTable(
+                name: "Disciplines");
+
+            migrationBuilder.DropTable(
                 name: "Courses");
 
             migrationBuilder.DropTable(
-                name: "Disciplines");
+                name: "Students");
+
+            migrationBuilder.DropTable(
+                name: "LectiveYears");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "Phones");
-
-            migrationBuilder.DropTable(
-                name: "LectiveYears");
         }
     }
 }

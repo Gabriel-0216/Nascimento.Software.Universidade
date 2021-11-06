@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,15 @@ namespace Nascimento.Software.Universidade.Domain.Models.Person.Shared
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public Address Address { get; set; }
-        public Phone Phone { get; set; }
+
+        [ForeignKey("AddressId")]
+        public virtual Address Address { get; set; }
+        public int AddressId { get; set; }
+
+        [ForeignKey("PhoneId")]
+        public virtual Phone Phone { get; set; }
+        public int PhoneId { get; set; }
+
         public DateTime Created_At { get; set; } = DateTime.Now.Date;
         public DateTime? Updatet_At { get; set; } = DateTime.Now.Date;
 

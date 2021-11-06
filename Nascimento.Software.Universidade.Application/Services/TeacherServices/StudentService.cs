@@ -41,7 +41,15 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
 
         public Task<IEnumerable<Student>> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var list = _commom.Get();
+                return list;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public Task<bool> Update(Student entity)

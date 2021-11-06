@@ -35,5 +35,20 @@ namespace Nascimento.Software.Universidade.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("GetAll")]
+        public async Task<ActionResult> GetAll()
+        {
+            try
+            {
+                var studentsList = await _service.GetAll();
+                return Ok(studentsList);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
     }
 }

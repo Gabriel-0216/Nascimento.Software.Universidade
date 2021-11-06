@@ -22,6 +22,9 @@ using Nascimento.Software.Universidade.Application.Services.TeacherServices;
 using Nascimento.Software.Universidade.Domain.Models.Person.Student;
 using Nascimento.Software.Universidade.Domain.Models.University.Disciplines;
 using Nascimento.Software.Universidade.Domain.Models.University.Courses;
+using NascimentoSoftware.Universidade.Infra.Processment;
+using Nascimento.Software.Universidade.Infra.Processment.Classes;
+using Nascimento.Software.Universidade.Application.Services.AcademicRegistration;
 
 namespace Nascimento.Software.Universidade.Api
 {
@@ -53,6 +56,9 @@ namespace Nascimento.Software.Universidade.Api
 
             services.AddScoped<ICommomService<Course>, CoursesService>();
             services.AddScoped<ICommomDAO<Course>, CourseDAO>();
+
+            services.AddScoped<IStudentCourseRegister, StudentCourseRegister>();
+            services.AddScoped<IAcademicService, AcademicService>();
 
             services.AddScoped<ApplicationDbContext>();
 

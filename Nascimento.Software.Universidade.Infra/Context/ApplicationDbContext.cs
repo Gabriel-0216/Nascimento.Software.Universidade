@@ -8,6 +8,7 @@ using Nascimento.Software.Universidade.Domain.Models.University.CollegeYear;
 using Nascimento.Software.Universidade.Domain.Models.University.Courses;
 using Nascimento.Software.Universidade.Domain.Models.University.Disciplines;
 using Nascimento.Software.Universidade.Domain.Models.University.Registration;
+using Nascimento.Software.Universidade.Domain.Models.University.StudentCourseRegister;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,9 +34,9 @@ namespace Nascimento.Software.Universidade.Infra.Context
         public DbSet<Course> Courses { get; set; }
         public DbSet<Discipline> Disciplines { get; set; }
         public DbSet<Course_Disciplines> Courses_Disciplines { get; set; }
+        public DbSet<StudentCourse> StudentCourses { get; set; }
         public DbSet<TermTime> LectiveYears { get; set; }
-        public DbSet<StudentDisciplines> StudentDisciplines{get;set;}
-        public DbSet<StudentCourse> StudentCourse {get;set;}
+
 
 
     }
