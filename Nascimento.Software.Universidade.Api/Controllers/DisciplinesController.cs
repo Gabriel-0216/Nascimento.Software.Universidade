@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Nascimento.Software.Universidade.Application.Services.Contratos;
 using Nascimento.Software.Universidade.Domain.Models.University.Disciplines;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Api.Controllers
@@ -26,7 +24,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             {
                 return Ok(await _service.GetAll());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
@@ -39,14 +37,14 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if(await _service.Add(model))
+                    if (await _service.Add(model))
                     {
                         return Ok("Cadastrado com sucesso");
                     }
                 }
                 return BadRequest("não foi possível adicionar");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }

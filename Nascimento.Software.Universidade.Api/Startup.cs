@@ -1,30 +1,22 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Nascimento.Software.Universidade.Domain.Models.Person.Teacher;
-using Nascimento.Software.Universidade.Infra.Context;
-using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
-using Nascimento.Software.Universidade.Infra.Repositorys.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Nascimento.Software.Universidade.Application.Services.AcademicRegistration;
 using Nascimento.Software.Universidade.Application.Services.Contratos;
 using Nascimento.Software.Universidade.Application.Services.TeacherServices;
 using Nascimento.Software.Universidade.Domain.Models.Person.Student;
-using Nascimento.Software.Universidade.Domain.Models.University.Disciplines;
+using Nascimento.Software.Universidade.Domain.Models.Person.Teacher;
 using Nascimento.Software.Universidade.Domain.Models.University.Courses;
-using NascimentoSoftware.Universidade.Infra.Processment;
+using Nascimento.Software.Universidade.Domain.Models.University.Disciplines;
+using Nascimento.Software.Universidade.Infra.Context;
 using Nascimento.Software.Universidade.Infra.Processment.Classes;
-using Nascimento.Software.Universidade.Application.Services.AcademicRegistration;
+using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
+using Nascimento.Software.Universidade.Infra.Repositorys.Repository;
+using NascimentoSoftware.Universidade.Infra.Processment;
 
 namespace Nascimento.Software.Universidade.Api
 {

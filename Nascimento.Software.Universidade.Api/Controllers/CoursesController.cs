@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Nascimento.Software.Universidade.Application.Services.Contratos;
 using Nascimento.Software.Universidade.Domain.Models.University.Courses;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Api.Controllers
@@ -26,7 +24,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             {
                 return Ok(await _service.GetAll());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
@@ -43,12 +41,12 @@ namespace Nascimento.Software.Universidade.Api.Controllers
 
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
             return BadRequest("não foi possível salvar o registro");
         }
- 
+
     }
 }

@@ -2,10 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Nascimento.Software.Universidade.Application.Services.Contratos;
 using Nascimento.Software.Universidade.Domain.Models.Person.Teacher;
-using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Api.Controllers
@@ -27,7 +24,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             {
                 return Ok(await _services.GetAll());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
@@ -38,10 +35,10 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         {
             try
             {
-               await _services.Add(entity);
+                await _services.Add(entity);
                 return Ok();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }

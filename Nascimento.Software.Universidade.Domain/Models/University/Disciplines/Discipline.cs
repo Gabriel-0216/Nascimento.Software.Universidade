@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace Nascimento.Software.Universidade.Domain.Models.University.Disciplines
 {
@@ -11,6 +7,8 @@ namespace Nascimento.Software.Universidade.Domain.Models.University.Disciplines
         public int Id { get; set; }
         public string Name { get; set; }
         public int CollegeYearId { get; set; }
+
+        [JsonIgnore]
         public CollegeYear.TermTime CollegeYear { get; set; }
 
     }

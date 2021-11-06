@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Nascimento.Software.Universidade.Domain.Models.University.CollegeYear;
 using Nascimento.Software.Universidade.Infra.Context;
 using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
 {
@@ -13,7 +13,8 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
     {
         private readonly ApplicationDbContext _context;
 
-        public CollegeYearsDAO(ApplicationDbContext context){
+        public CollegeYearsDAO(ApplicationDbContext context)
+        {
             _context = context;
         }
         public async Task<bool> Add(TermTime entity)
@@ -24,7 +25,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -34,12 +35,12 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
         {
             try
             {
-                var entity = await _context.LectiveYears.FirstAsync(p=> p.Id == id);
+                var entity = await _context.LectiveYears.FirstAsync(p => p.Id == id);
                 _context.LectiveYears.Remove(entity);
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -49,9 +50,9 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
         {
             try
             {
-                return await _context.LectiveYears.AsNoTracking().OrderBy(p=> p.Id).ToListAsync(); 
+                return await _context.LectiveYears.AsNoTracking().OrderBy(p => p.Id).ToListAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -63,7 +64,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
             {
                 return await _context.LectiveYears.FirstAsync(p => p.Id == id);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -78,11 +79,11 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
         {
             try
             {
-                 _context.LectiveYears.Update(entity);
-                 await _context.SaveChangesAsync();
-                 return true;
+                _context.LectiveYears.Update(entity);
+                await _context.SaveChangesAsync();
+                return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }

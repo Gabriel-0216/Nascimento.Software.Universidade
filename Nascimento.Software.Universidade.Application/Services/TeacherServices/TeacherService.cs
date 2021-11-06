@@ -3,8 +3,6 @@ using Nascimento.Software.Universidade.Domain.Models.Person.Teacher;
 using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
@@ -23,7 +21,8 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
                 await _commom.Add(entity);
                 return true;
 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }
@@ -35,7 +34,8 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
             {
                 await _commom.Delete(id);
                 return true;
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }
@@ -46,13 +46,13 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
             try
             {
                 var retorno = await _commom.GetOne(id);
-                if(retorno != null)
+                if (retorno != null)
                 {
                     return retorno;
                 }
                 return null;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -65,7 +65,7 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
                 var retorno = await _commom.Get();
                 return retorno;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -78,7 +78,8 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
                 await _commom.Update(entity);
                 return true;
 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }

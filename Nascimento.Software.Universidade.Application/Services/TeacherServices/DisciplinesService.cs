@@ -3,8 +3,6 @@ using Nascimento.Software.Universidade.Domain.Models.University.Disciplines;
 using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
@@ -24,7 +22,7 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
 
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -51,12 +49,12 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
             {
                 return _commom.Get();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
         }
 
-       
+
     }
 }

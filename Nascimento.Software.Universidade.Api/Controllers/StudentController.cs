@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Nascimento.Software.Universidade.Application.Services.Contratos;
 using Nascimento.Software.Universidade.Domain.Models.Person.Student;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Api.Controllers
@@ -30,7 +28,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
                 }
                 return BadRequest("Ocorreu um erro");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }

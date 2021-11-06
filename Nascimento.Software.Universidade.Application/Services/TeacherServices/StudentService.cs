@@ -3,8 +3,6 @@ using Nascimento.Software.Universidade.Domain.Models.Person.Student;
 using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
@@ -23,7 +21,7 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
                 await _commom.Add(entity);
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }

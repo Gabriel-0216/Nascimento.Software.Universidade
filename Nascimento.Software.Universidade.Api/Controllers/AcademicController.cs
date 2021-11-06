@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Nascimento.Software.Universidade.Application.Services.AcademicRegistration;
 using Nascimento.Software.Universidade.Domain.Models.University.StudentCourseRegister;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Api.Controllers
@@ -18,12 +14,12 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         {
             _service = service;
         }
-        
+
         [HttpGet]
         public async Task<ActionResult> Get()
         {
             var entity = await _service.Get();
-            if(entity != null)
+            if (entity != null)
             {
                 return Ok(entity);
             }
@@ -36,7 +32,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(await _service.Start(studentCourse))
+                if (await _service.Start(studentCourse))
                 {
                     return Ok("cadastrado");
                 }

@@ -2,8 +2,6 @@
 using NascimentoSoftware.Universidade.Infra.Processment;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Application.Services.AcademicRegistration
@@ -30,12 +28,12 @@ namespace Nascimento.Software.Universidade.Application.Services.AcademicRegistra
         {
             try
             {
-                if(await _register.Start(student))
+                if (await _register.Start(student))
                 {
                     return true;
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }

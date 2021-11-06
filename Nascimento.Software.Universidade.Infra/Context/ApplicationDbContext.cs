@@ -1,26 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Nascimento.Software.Universidade.Domain.Models.Person.Shared;
 using Nascimento.Software.Universidade.Domain.Models.Person.Student;
 using Nascimento.Software.Universidade.Domain.Models.Person.Teacher;
-using Nascimento.Software.Universidade.Domain.Models.University;
 using Nascimento.Software.Universidade.Domain.Models.University.CollegeYear;
 using Nascimento.Software.Universidade.Domain.Models.University.Courses;
 using Nascimento.Software.Universidade.Domain.Models.University.Disciplines;
 using Nascimento.Software.Universidade.Domain.Models.University.Registration;
 using Nascimento.Software.Universidade.Domain.Models.University.StudentCourseRegister;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Infra.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options ) : base(options) { 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

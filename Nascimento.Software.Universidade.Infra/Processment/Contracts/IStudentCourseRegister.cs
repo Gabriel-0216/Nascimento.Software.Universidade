@@ -1,7 +1,6 @@
-using System.Collections;
+using Nascimento.Software.Universidade.Domain.Models.University.StudentCourseRegister;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Nascimento.Software.Universidade.Domain.Models.University.StudentCourseRegister;
 
 namespace NascimentoSoftware.Universidade.Infra.Processment
 {

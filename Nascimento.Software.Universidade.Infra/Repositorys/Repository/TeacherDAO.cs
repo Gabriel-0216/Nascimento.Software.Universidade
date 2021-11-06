@@ -5,7 +5,6 @@ using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
@@ -24,7 +23,8 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
                 _context.teachers.Add(entity);
                 await _context.SaveChangesAsync();
                 return true;
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 //logg e.message
                 return false;
@@ -37,13 +37,14 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
             try
             {
                 var entity = _context.teachers.FirstOrDefault<Teacher>(p => p.Id == id);
-                if(entity != null)
+                if (entity != null)
                 {
                     _context.teachers.Remove(entity);
                     await _context.SaveChangesAsync();
                     return true;
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }
@@ -60,7 +61,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
                 query = query.AsNoTracking().OrderBy(m => m.Id);
                 return await query.ToListAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -72,7 +73,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
             {
                 return await _context.teachers.FirstOrDefaultAsync(p => p.Id == id);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }

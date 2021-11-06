@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Nascimento.Software.Universidade.Domain.Models.Person.Student;
-using Nascimento.Software.Universidade.Domain.Models.University.Courses;
 using Nascimento.Software.Universidade.Domain.Models.University.StudentCourseRegister;
 using Nascimento.Software.Universidade.Infra.Context;
 using NascimentoSoftware.Universidade.Infra.Processment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Infra.Processment.Classes
@@ -27,8 +24,8 @@ namespace Nascimento.Software.Universidade.Infra.Processment.Classes
                 IQueryable<StudentCourse> query = _context.StudentCourses
                      .Include(p => p.Course)
                      .Include(p => p.Student)
-                     .Include(p=>  p.Student.Address)
-                     .Include(p=> p.Student.Phone)
+                     .Include(p => p.Student.Address)
+                     .Include(p => p.Student.Phone)
                      .OrderBy(p => p.Id);
 
                 var q = await query.ToListAsync();
@@ -50,7 +47,7 @@ namespace Nascimento.Software.Universidade.Infra.Processment.Classes
                 return true;
 
             }
-            catch(Exception )
+            catch (Exception)
             {
                 return false;
             }

@@ -5,7 +5,6 @@ using Nascimento.Software.Universidade.Infra.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
@@ -13,7 +12,7 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
     public class CollegeYear : ICommomService<TermTime>
     {
         public ApplicationDbContext _context;
-        
+
         public CollegeYear(ApplicationDbContext context)
         {
             _context = context;
@@ -26,7 +25,7 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -42,7 +41,7 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
                 return true;
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -53,13 +52,13 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
             try
             {
                 var entity = await _context.LectiveYears.FindAsync(id);
-                if(entity != null)
+                if (entity != null)
                 {
                     return entity;
                 }
                 return null;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -71,13 +70,13 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
             {
 
                 var entity = await _context.LectiveYears.OrderBy(p => p.Id).AsNoTracking().ToListAsync();
-                if(entity != null)
+                if (entity != null)
                 {
                     return entity;
                 }
                 return null;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -87,11 +86,11 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
         {
             try
             {
-               _context.Update(entity);
-               await _context.SaveChangesAsync();
-               return true;
+                _context.Update(entity);
+                await _context.SaveChangesAsync();
+                return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }

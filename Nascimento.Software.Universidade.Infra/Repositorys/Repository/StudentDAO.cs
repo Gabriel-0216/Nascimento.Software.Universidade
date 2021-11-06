@@ -5,7 +5,6 @@ using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
@@ -25,7 +24,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -36,11 +35,11 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
             try
             {
                 var entity = await _context.Students.FindAsync(id);
-               _context.Students.Remove(entity);
-               await _context.SaveChangesAsync();
+                _context.Students.Remove(entity);
+                await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -58,7 +57,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
                 return await query.ToListAsync();
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -74,7 +73,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
 
                 return await query.FirstOrDefaultAsync(p => p.Id == id);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -93,7 +92,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }

@@ -5,12 +5,11 @@ using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
 {
-   public class CourseDAO : ICommomDAO<Course>
+    public class CourseDAO : ICommomDAO<Course>
     {
         private readonly ApplicationDbContext _context;
         public CourseDAO(ApplicationDbContext context)
@@ -26,7 +25,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -41,7 +40,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -54,9 +53,9 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
                 IQueryable<Course> query = _context.Courses.Include(p => p.CollegeYear);
                 query = query.OrderBy(p => p.Id).AsNoTracking();
                 return await query.ToListAsync();
-                
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -70,7 +69,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
                 return await query.FirstAsync(p => p.Id == id);
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -89,7 +88,7 @@ namespace Nascimento.Software.Universidade.Infra.Repositorys.Repository
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
