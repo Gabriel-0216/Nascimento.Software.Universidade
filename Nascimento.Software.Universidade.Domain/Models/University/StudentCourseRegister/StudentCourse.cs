@@ -15,10 +15,8 @@ namespace Nascimento.Software.Universidade.Domain.Models.University.StudentCours
         public int StudentId { get; set; }
         public int CourseId { get; set; }
         [ForeignKey("StudentId")]
-        [JsonIgnore]
         public virtual Student Student { get; set; }
         [ForeignKey("CourseId")]
-        [JsonIgnore]
         public virtual Courses.Course Course { get; set; }
         public DateTime Created_At { get; set; }
 

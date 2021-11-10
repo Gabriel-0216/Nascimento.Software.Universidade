@@ -7,8 +7,6 @@ namespace Nascimento.Software.Universidade.Domain.Models.University.Disciplines
         public int Id { get; set; }
         public string Name { get; set; }
         public int CollegeYearId { get; set; }
-
-        [JsonIgnore]
         public CollegeYear.TermTime CollegeYear { get; set; }
 
     }

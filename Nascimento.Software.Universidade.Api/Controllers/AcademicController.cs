@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Nascimento.Software.Universidade.Api.DTO;
 using Nascimento.Software.Universidade.Application.Services.AcademicRegistration;
 using Nascimento.Software.Universidade.Domain.Models.University.StudentCourseRegister;
 using System.Threading.Tasks;
@@ -10,8 +12,10 @@ namespace Nascimento.Software.Universidade.Api.Controllers
     public class AcademicController : ControllerBase
     {
         private readonly IAcademicService _service;
-        public AcademicController(IAcademicService service)
+        private readonly IMapper _mapper;
+        public AcademicController(IAcademicService service, IMapper mapper)
         {
+            _mapper = mapper;
             _service = service;
         }
 
@@ -28,8 +32,9 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(StudentCourse studentCourse)
+        public async Task<ActionResult> Post(AcademicRegisterDTO studentDTO)
         {
+            var studentCourse = _mapper.Map<StudentCourse>(studentDTO);
             if (ModelState.IsValid)
             {
                 if (await _service.Start(studentCourse))

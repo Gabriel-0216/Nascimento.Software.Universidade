@@ -32,9 +32,22 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
             throw new NotImplementedException();
         }
 
-        public Task<Course> Get(int id)
+        public async Task<Course> Get(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var entity = await _commom.GetOne(id);
+                if(entity == null)
+                {
+                    throw new Exception("ocorreu um erro, esse curso não existe");
+                }
+                return entity;
+
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
         }
 
         public async Task<IEnumerable<Course>> GetAll()

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
 using Microsoft.OpenApi.Models;
 using Nascimento.Software.Universidade.Application.Services.AcademicRegistration;
 using Nascimento.Software.Universidade.Application.Services.Contratos;
@@ -17,6 +18,7 @@ using Nascimento.Software.Universidade.Infra.Processment.Classes;
 using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
 using Nascimento.Software.Universidade.Infra.Repositorys.Repository;
 using NascimentoSoftware.Universidade.Infra.Processment;
+using System;
 
 namespace Nascimento.Software.Universidade.Api
 {
@@ -53,6 +55,8 @@ namespace Nascimento.Software.Universidade.Api
             services.AddScoped<IAcademicService, AcademicService>();
 
             services.AddScoped<ApplicationDbContext>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers().AddNewtonsoftJson(
                x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
