@@ -18,6 +18,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         }
 
         [HttpGet]
+        [Route("listarTodos")]
         public async Task<ActionResult> Get()
         {
             try
@@ -26,11 +27,12 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
         [HttpPost]
+        [Route("adicionar")]
         public async Task<ActionResult> Post(Discipline model)
         {
             try
@@ -46,8 +48,53 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
+        }
+
+        [HttpDelete]
+        [Route("deletar")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                var entity = await _service.Get(id);
+                if(entity != null)
+                {
+                    if(await _service.Delete(id))
+                    {
+                        return Ok("deletado");
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+            return BadRequest("Não deletado");
+        }
+
+        [HttpPut]
+        [Route("update")]
+        public async Task<ActionResult> Update(Discipline entity)
+        {
+            try
+            {
+                var disciplineEntity = await _service.Get(entity.Id);
+                if(disciplineEntity != null)
+                {
+                    if(await _service.Update(entity))
+                    {
+                        return Ok("Atualizado");
+                    }
+                }
+
+            }
+            catch(Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+            return BadRequest("Não foi possível atualizar o registro.");
         }
     }
 }

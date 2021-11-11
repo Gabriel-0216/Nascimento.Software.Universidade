@@ -17,6 +17,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             _service = service;
         }
         [HttpPost]
+        [Route("adicionar")]
         public async Task<ActionResult> Add(Student model)
         {
             try
@@ -35,7 +36,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         }
 
         [HttpGet]
-        [Route("GetAll")]
+        [Route("listarTodos")]
         public async Task<ActionResult> GetAll()
         {
             try
@@ -47,6 +48,46 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
+        }
+
+        [HttpDelete]
+        [Route("deletar")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                if(await _service.Delete(id))
+                {
+                    return Ok("Deletado");
+                }
+            }
+            catch(Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+            return BadRequest("Não foi possível deletar");
+        }
+
+        [HttpPut]
+        [Route("update")]
+        public async Task<ActionResult> Update(Student entity)
+        {
+            try
+            {
+                var student = await _service.Get(entity.Id);
+                if (student != null)
+                {
+                    if(await _service.Update(entity))
+                    {
+                        return Ok("Atualizado");
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+            return BadRequest("Não foi possível deletar");
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         }
 
         [HttpGet]
+        [Route("listarTodos")]
         public async Task<ActionResult> Get()
         {
             try
@@ -31,6 +32,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         }
 
         [HttpPost]
+        [Route("adicionar")]
         public async Task<ActionResult> Post(Course entity)
         {
             try
@@ -46,6 +48,19 @@ namespace Nascimento.Software.Universidade.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
             return BadRequest("não foi possível salvar o registro");
+        }
+        [HttpDelete]
+        [Route("deletar")]
+        public async Task<ActionResult> Delete()
+        {
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("update")]
+        public async Task<ActionResult> Update()
+        {
+            return Ok();
         }
 
     }

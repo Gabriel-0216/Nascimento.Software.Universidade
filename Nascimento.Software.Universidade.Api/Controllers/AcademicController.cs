@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Nascimento.Software.Universidade.Api.DTO;
 using Nascimento.Software.Universidade.Application.Services.AcademicRegistration;
 using Nascimento.Software.Universidade.Domain.Models.University.StudentCourseRegister;
+using System;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Api.Controllers
@@ -20,6 +21,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         }
 
         [HttpGet]
+        [Route("listarTodos")]
         public async Task<ActionResult> Get()
         {
             var entity = await _service.Get();
@@ -32,6 +34,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         }
 
         [HttpPost]
+        [Route("adicionarRegistroAcademico")]
         public async Task<ActionResult> Post(AcademicRegisterDTO studentDTO)
         {
             var studentCourse = _mapper.Map<StudentCourse>(studentDTO);
@@ -44,6 +47,20 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             }
 
             return BadRequest("Ocorreu um erro");
+        }
+
+        [HttpDelete]
+        [Route("deletarRegistroAcademico")]
+        public async Task<ActionResult> Delete()
+        {
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("atualizarRegistroAcademico")]
+        public async Task<ActionResult> Update()
+        {
+            return Ok();
         }
     }
 }
