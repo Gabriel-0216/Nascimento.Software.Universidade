@@ -19,6 +19,7 @@ using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
 using Nascimento.Software.Universidade.Infra.Repositorys.Repository;
 using NascimentoSoftware.Universidade.Infra.Processment;
 using System;
+using Nascimento.Software.Universidade.Infra.Processment.Contracts;
 
 namespace Nascimento.Software.Universidade.Api
 {
@@ -53,6 +54,9 @@ namespace Nascimento.Software.Universidade.Api
 
             services.AddScoped<IStudentCourseRegister, StudentCourseRegister>();
             services.AddScoped<IAcademicService, AcademicService>();
+
+            services.AddScoped<ICourseDisciplineService, CourseDisciplineService>();
+            services.AddScoped<ICourseDiscipline, CourseDisciplineRegister>();
 
             services.AddScoped<ApplicationDbContext>();
 

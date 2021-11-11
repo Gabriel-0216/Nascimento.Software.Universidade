@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nascimento.Software.Universidade.Domain", "Nascimento.Software.Universidade.Domain\Nascimento.Software.Universidade.Domain.csproj", "{CFF70E2B-C1B5-410F-BC02-8CCE5C2CDBE0}"
 EndProject
@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nascimento.Software.Univers
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nascimento.Software.Universidade.Api", "Nascimento.Software.Universidade.Api\Nascimento.Software.Universidade.Api.csproj", "{6C7AF594-6DAF-4937-BEEB-8612346272F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nascimento.Software.Universidade.Application", "Nascimento.Software.Universidade.Application\Nascimento.Software.Universidade.Application.csproj", "{D252ED4F-33FE-4F6D-AEDB-8B2596A9A440}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nascimento.Software.Universidade.Application", "Nascimento.Software.Universidade.Application\Nascimento.Software.Universidade.Application.csproj", "{D252ED4F-33FE-4F6D-AEDB-8B2596A9A440}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

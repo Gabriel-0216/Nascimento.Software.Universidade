@@ -26,6 +26,7 @@ namespace Nascimento.Software.Universidade.Infra.Processment.Classes
                      .Include(p => p.Student)
                      .Include(p => p.Student.Address)
                      .Include(p => p.Student.Phone)
+                     .Include(d => d.Course.CollegeYear)
                      .OrderBy(p => p.Id);
 
                 var q = await query.ToListAsync();

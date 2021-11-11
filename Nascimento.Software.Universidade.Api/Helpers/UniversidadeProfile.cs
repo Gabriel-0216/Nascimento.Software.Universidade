@@ -11,6 +11,7 @@ namespace Nascimento.Software.Universidade.Api.Helpers
         {
             CreateMap<StudentCourse, AcademicRegisterDTO>().ReverseMap();
             CreateMap<Course_Disciplines, DisciplineCourseDTO>().ReverseMap();
+
         }
     }
 }
