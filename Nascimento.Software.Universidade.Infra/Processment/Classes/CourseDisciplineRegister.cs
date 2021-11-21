@@ -5,7 +5,6 @@ using Nascimento.Software.Universidade.Infra.Processment.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Infra.Processment.Classes
@@ -22,12 +21,12 @@ namespace Nascimento.Software.Universidade.Infra.Processment.Classes
             try
             {
                 return await _context.Courses_Disciplines.AsNoTracking().
-                    Include(p=> p.Discipline)
+                    Include(p => p.Discipline)
                     .Include(d => d.Course)
                     .ToListAsync();
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -42,7 +41,7 @@ namespace Nascimento.Software.Universidade.Infra.Processment.Classes
                     .Include(d => d.Discipline)
                     .AsNoTracking().ToListAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -56,12 +55,12 @@ namespace Nascimento.Software.Universidade.Infra.Processment.Classes
                 {
                     return false;
                 }
-                if(await RegisterDisciplineCourse(course_Disciplines))
+                if (await RegisterDisciplineCourse(course_Disciplines))
                 {
                     return true;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -74,13 +73,13 @@ namespace Nascimento.Software.Universidade.Infra.Processment.Classes
             {
                 var course = await _context.Courses_Disciplines.Where(p => p.CourseId == course_Disciplines.CourseId).ToListAsync();
                 var discipline = await _context.Courses_Disciplines.Where(d => d.DisciplineId == course_Disciplines.DisciplineId).ToListAsync();
-                if(course == null || discipline == null)
+                if (course == null || discipline == null)
                 {
                     return false;
                 }
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -93,7 +92,7 @@ namespace Nascimento.Software.Universidade.Infra.Processment.Classes
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nascimento.Software.Universidade.Application.Services.Contratos;
 using Nascimento.Software.Universidade.Domain.Models.Person.Student;
@@ -9,6 +11,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class StudentController : ControllerBase
     {
         private readonly ICommomService<Student> _service;
@@ -56,12 +59,12 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         {
             try
             {
-                if(await _service.Delete(id))
+                if (await _service.Delete(id))
                 {
                     return Ok("Deletado");
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
@@ -77,13 +80,13 @@ namespace Nascimento.Software.Universidade.Api.Controllers
                 var student = await _service.Get(entity.Id);
                 if (student != null)
                 {
-                    if(await _service.Update(entity))
+                    if (await _service.Update(entity))
                     {
                         return Ok("Atualizado");
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }

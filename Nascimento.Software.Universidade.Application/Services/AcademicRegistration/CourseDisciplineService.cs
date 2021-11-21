@@ -1,9 +1,6 @@
 ﻿using Nascimento.Software.Universidade.Domain.Models.University.Registration;
 using Nascimento.Software.Universidade.Infra.Processment.Contracts;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nascimento.Software.Universidade.Application.Services.AcademicRegistration

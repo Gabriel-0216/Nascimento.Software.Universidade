@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Nascimento.Software.Universidade.Domain.Models.University.Disciplines
+﻿namespace Nascimento.Software.Universidade.Domain.Models.University.Disciplines
 {
     public class Discipline
     {

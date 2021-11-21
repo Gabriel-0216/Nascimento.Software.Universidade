@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nascimento.Software.Universidade.Api.DTO;
@@ -12,12 +14,13 @@ namespace Nascimento.Software.Universidade.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AcademicController : ControllerBase
     {
         private readonly IAcademicService _service;
         private readonly ICourseDisciplineService _courseDiscipline;
         private readonly IMapper _mapper;
-        public AcademicController(IAcademicService service, 
+        public AcademicController(IAcademicService service,
             ICourseDisciplineService courseDisciplineService,
             IMapper mapper)
         {
@@ -79,7 +82,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
         public async Task<ActionResult> GetCoursesByDiscipline(int disciplineId)
         {
             var courses = await _courseDiscipline.GetCoursesByDiscipline(disciplineId);
-            if(courses == null)
+            if (courses == null)
             {
                 return BadRequest();
             }
@@ -93,12 +96,12 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             try
             {
                 var mapReturn = _mapper.Map<Course_Disciplines>(disciplineCourseDTO);
-                if(await _courseDiscipline.Start(mapReturn))
+                if (await _courseDiscipline.Start(mapReturn))
                 {
                     return Ok("Cadastrado");
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }

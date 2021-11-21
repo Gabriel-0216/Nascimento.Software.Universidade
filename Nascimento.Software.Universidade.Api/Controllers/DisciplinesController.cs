@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nascimento.Software.Universidade.Application.Services.Contratos;
 using Nascimento.Software.Universidade.Domain.Models.University.Disciplines;
@@ -9,6 +11,7 @@ namespace Nascimento.Software.Universidade.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class DisciplinesController : ControllerBase
     {
         private readonly ICommomService<Discipline> _service;
@@ -59,15 +62,15 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             try
             {
                 var entity = await _service.Get(id);
-                if(entity != null)
+                if (entity != null)
                 {
-                    if(await _service.Delete(id))
+                    if (await _service.Delete(id))
                     {
                         return Ok("deletado");
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
@@ -81,16 +84,16 @@ namespace Nascimento.Software.Universidade.Api.Controllers
             try
             {
                 var disciplineEntity = await _service.Get(entity.Id);
-                if(disciplineEntity != null)
+                if (disciplineEntity != null)
                 {
-                    if(await _service.Update(entity))
+                    if (await _service.Update(entity))
                     {
                         return Ok("Atualizado");
                     }
                 }
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }

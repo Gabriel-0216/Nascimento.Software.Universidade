@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Nascimento.Software.Universidade.Domain.Models.Person.Shared;
 using Nascimento.Software.Universidade.Domain.Models.Person.Student;
 using Nascimento.Software.Universidade.Domain.Models.Person.Teacher;
@@ -10,7 +11,7 @@ using Nascimento.Software.Universidade.Domain.Models.University.StudentCourseReg
 
 namespace Nascimento.Software.Universidade.Infra.Context
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -19,6 +20,7 @@ namespace Nascimento.Software.Universidade.Infra.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course_Disciplines>().HasKey(PE => new { PE.CourseId, PE.DisciplineId });
+            base.OnModelCreating(modelBuilder);
         }
         public DbSet<Teacher> teachers { get; set; }
         public DbSet<Address> Addresses { get; set; }

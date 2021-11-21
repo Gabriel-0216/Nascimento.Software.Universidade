@@ -1,11 +1,15 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Nascimento.Software.Universidade.Api.Configuration;
+using Nascimento.Software.Universidade.Api.Tokens;
 using Nascimento.Software.Universidade.Application.Services.AcademicRegistration;
 using Nascimento.Software.Universidade.Application.Services.Contratos;
 using Nascimento.Software.Universidade.Application.Services.TeacherServices;
@@ -15,11 +19,13 @@ using Nascimento.Software.Universidade.Domain.Models.University.Courses;
 using Nascimento.Software.Universidade.Domain.Models.University.Disciplines;
 using Nascimento.Software.Universidade.Infra.Context;
 using Nascimento.Software.Universidade.Infra.Processment.Classes;
+using Nascimento.Software.Universidade.Infra.Processment.Contracts;
 using Nascimento.Software.Universidade.Infra.Repositorys.Contracts;
 using Nascimento.Software.Universidade.Infra.Repositorys.Repository;
+using Nascimento.Software.Universidade.Infra.Users;
 using NascimentoSoftware.Universidade.Infra.Processment;
 using System;
-using Nascimento.Software.Universidade.Infra.Processment.Contracts;
+using System.Text;
 
 namespace Nascimento.Software.Universidade.Api
 {
@@ -42,6 +48,7 @@ namespace Nascimento.Software.Universidade.Api
             services.AddScoped<ICommomDAO<Teacher>, TeacherDAO>();
             services.AddScoped<ICommomService<Teacher>, TeacherService>();
 
+            services.AddScoped<TokenGenerator>();
 
             services.AddScoped<ICommomService<Student>, StudentService>();
             services.AddScoped<ICommomDAO<Student>, StudentDAO>();
@@ -58,7 +65,34 @@ namespace Nascimento.Software.Universidade.Api
             services.AddScoped<ICourseDisciplineService, CourseDisciplineService>();
             services.AddScoped<ICourseDiscipline, CourseDisciplineRegister>();
 
+            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddScoped<ApplicationDbContext>();
+
+            services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(jwt =>
+            {
+                var key = Encoding.ASCII.GetBytes(Configuration["JwtConfig:Secret"]);
+                jwt.SaveToken = true;
+                jwt.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    RequireExpirationTime = false,
+                };
+            });
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -84,6 +118,7 @@ namespace Nascimento.Software.Universidade.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

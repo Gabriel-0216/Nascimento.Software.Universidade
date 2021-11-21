@@ -37,14 +37,14 @@ namespace Nascimento.Software.Universidade.Application.Services.TeacherServices
             try
             {
                 var entity = await _commom.GetOne(id);
-                if(entity == null)
+                if (entity == null)
                 {
                     throw new Exception("ocorreu um erro, esse curso não existe");
                 }
                 return entity;
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
